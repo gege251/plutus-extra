@@ -205,15 +205,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "plutus-apps": {
-        "branch": "main",
+        "branch": "7f7aca8500105d3a0830b40627f1821c9ac7b58e",
         "description": "The Plutus application platform",
         "homepage": null,
         "owner": "input-output-hk",
         "repo": "plutus-apps",
-        "rev": "404af7ac3e27ebcb218c05f79d9a70ca966407c9",
-        "sha256": "00pv5ds99lf6lmws3a3ipsn9amg56ayc9b0wqki2gky464dm6gzr",
+        "rev": "7f7aca8500105d3a0830b40627f1821c9ac7b58e",
+        "sha256": "1zn8mhwdwk5ya0i4x8pj906glica62y5pi95l26nav4xldwj8zv0",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/plutus-apps/archive/404af7ac3e27ebcb218c05f79d9a70ca966407c9.tar.gz",
+        "url": "https://github.com/input-output-hk/plutus-apps/archive/7f7aca8500105d3a0830b40627f1821c9ac7b58e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "purescript-bridge": {
