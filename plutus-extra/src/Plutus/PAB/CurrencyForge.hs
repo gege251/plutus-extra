@@ -17,6 +17,7 @@ import Plutus.Contract qualified as Contract
 import Plutus.Contract.State (Contract)
 import Plutus.Contracts.Currency qualified as Currency
 import Plutus.PAB.Effects.Contract.Builtin qualified as Builtin
+import Plutus.V1.Ledger.Ada (toValue)
 import Plutus.V1.Ledger.Value qualified as Value (assetClass, assetClassValue)
 import Wallet.Emulator.Types (Wallet (..), mockWalletPaymentPubKeyHash)
 
@@ -55,5 +56,5 @@ initCurrency tokenName forgedAmount receivingWallet = do
   let currencySymbol = Currency.currencySymbol cur
       assetClass = Value.assetClass currencySymbol tokenName
 
-  giveTo receivingWallet (Value.assetClassValue assetClass forgedAmount)
+  giveTo receivingWallet (Value.assetClassValue assetClass forgedAmount <> toValue Ledger.minAdaTxOut)
   OutputBus.sendBus assetClass
