@@ -71,6 +71,7 @@ module Test.Tasty.Plutus.Context (
 
 import Data.Kind (Type)
 import Data.Sequence qualified as Seq
+import Ledger (PaymentPubKeyHash (unPaymentPubKeyHash))
 import Plutus.V1.Ledger.Ada (lovelaceValueOf)
 import Plutus.V1.Ledger.Crypto (PubKeyHash)
 import Plutus.V1.Ledger.Scripts (ValidatorHash)
@@ -87,7 +88,10 @@ import Test.Tasty.Plutus.Internal.Context (
   makeIncompleteContexts,
   outputsToInputs,
  )
-import Wallet.Emulator.Types (Wallet, walletPubKeyHash)
+import Wallet.Emulator.Types (Wallet, mockWalletPaymentPubKeyHash)
+
+walletPubKeyHash :: Wallet -> PubKeyHash
+walletPubKeyHash = unPaymentPubKeyHash . mockWalletPaymentPubKeyHash
 
 {- | Single-input context.
 

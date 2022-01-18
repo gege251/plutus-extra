@@ -104,10 +104,10 @@
             ];
           };
           sha256map = {
-            "https://github.com/input-output-hk/plutus.git"."3f089ccf0ca746b399c99afe51e063b0640af547" =
-              "BhGQPiCv4UxVs0XEdMMddaNWiztmkoeJotpW/lrtqNs=";
-            "https://github.com/input-output-hk/plutus-apps.git"."404af7ac3e27ebcb218c05f79d9a70ca966407c9" =
-              "+T9TGzHEzyfixBysxLwy5VWVrL5xqKF5pcbRlHQr+wI=";
+            "https://github.com/input-output-hk/plutus.git"."2721c59fd2302b75c4138456c29fd5b509e8340a" =
+              "02g8pzldyfl4pm8sy22yd3l2fr3zpyhwkvv9x3h9lsf6lfx5wi7k";
+            "https://github.com/input-output-hk/plutus-apps.git"."21b592b1ea4bc727c1d486432e8aa8388d9e706c" =
+              "08c7ghziy0sz5wgc7pl7a9vv7vjf4n9c58llqgg9hdq3zwxypdg5";
             "https://github.com/Quid2/flat.git"."ee59880f47ab835dbd73bea0847dab7869fc20d8" =
               "lRFND+ZnZvAph6ZYkr9wl9VAx41pb3uSFP8Wc7idP9M=";
             "https://github.com/input-output-hk/purescript-bridge.git"."366fc70b341e2633f3ad0158a577d52e1cd2b138" =

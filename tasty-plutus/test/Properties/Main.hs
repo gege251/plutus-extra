@@ -8,6 +8,7 @@ module Main (main) where
 
 import Prelude hiding (($), (&&), (*), (+), (==))
 
+import Ledger (PaymentPubKeyHash (unPaymentPubKeyHash))
 import Ledger.Crypto (PubKeyHash)
 import Ledger.Typed.Scripts (
   TypedValidator,
@@ -51,8 +52,8 @@ import Test.Tasty.QuickCheck (
 import Plutus.V1.Ledger.Contexts (ScriptContext)
 import PlutusTx.Prelude (traceIfFalse, ($), (&&), (*), (+), (==))
 import PlutusTx.TH (compile)
-import Wallet.Emulator.Types (WalletNumber (WalletNumber))
-import Wallet.Emulator.Wallet (fromWalletNumber, walletPubKeyHash)
+import Wallet.Emulator.Types (WalletNumber (WalletNumber), mockWalletPaymentPubKeyHash)
+import Wallet.Emulator.Wallet (fromWalletNumber)
 
 --------------------------------------------------------------------------------
 
@@ -170,4 +171,4 @@ typedSimpleValidator =
     wrap = toTestValidator
 
 userPKHash :: PubKeyHash
-userPKHash = walletPubKeyHash $ fromWalletNumber $ WalletNumber 1
+userPKHash = unPaymentPubKeyHash $ mockWalletPaymentPubKeyHash $ fromWalletNumber $ WalletNumber 1
