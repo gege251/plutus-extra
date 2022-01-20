@@ -17,9 +17,9 @@ import Plutus.Contract qualified as Contract
 import Plutus.Contract.State (Contract)
 import Plutus.Contracts.Currency qualified as Currency
 import Plutus.PAB.Effects.Contract.Builtin qualified as Builtin
+import Plutus.V1.Ledger.Ada (toValue)
 import Plutus.V1.Ledger.Value qualified as Value (assetClass, assetClassValue)
-import Wallet.Emulator.Types (Wallet (..))
-import Wallet.Emulator.Wallet qualified as Wallet
+import Wallet.Emulator.Types (Wallet (..), mockWalletPaymentPubKeyHash)
 
 --------------------------------------------------------------------------------
 
@@ -38,8 +38,8 @@ giveTo ::
   Ledger.Value ->
   Contract w Builtin.EmptySchema Contract.ContractError ()
 giveTo wallet value = do
-  ownPK <- Contract.mapError fromCurrencyError Contract.ownPubKeyHash
-  let pubKeyHash = Wallet.walletPubKeyHash wallet
+  ownPK <- Contract.mapError fromCurrencyError Contract.ownPaymentPubKeyHash
+  let pubKeyHash = mockWalletPaymentPubKeyHash wallet
   when (pubKeyHash /= ownPK) $ do
     tx <- Contract.submitTx $ Constraints.mustPayToPubKey pubKeyHash value
     Contract.awaitTxConfirmed $ Ledger.getCardanoTxId tx
@@ -51,10 +51,10 @@ initCurrency ::
   Wallet ->
   Contract (OutputBus.OutputBus Ledger.AssetClass) Builtin.EmptySchema Contract.ContractError ()
 initCurrency tokenName forgedAmount receivingWallet = do
-  ownPK <- Contract.mapError fromCurrencyError Contract.ownPubKeyHash
+  ownPK <- Contract.mapError fromCurrencyError Contract.ownPaymentPubKeyHash
   cur <- Contract.mapError fromCurrencyError $ Currency.mintContract ownPK [(tokenName, forgedAmount)]
   let currencySymbol = Currency.currencySymbol cur
       assetClass = Value.assetClass currencySymbol tokenName
 
-  giveTo receivingWallet (Value.assetClassValue assetClass forgedAmount)
+  giveTo receivingWallet (Value.assetClassValue assetClass forgedAmount <> toValue Ledger.minAdaTxOut)
   OutputBus.sendBus assetClass

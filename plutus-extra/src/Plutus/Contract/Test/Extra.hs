@@ -523,7 +523,7 @@ addressValueOptions walletAllocs validatorAllocs = EmulatorConfig (Right [tx]) d
     tx =
       mempty
         { Ledger.txOutputs =
-            fmap (\(pkh, val) -> Ledger.TxOut (Ledger.pubKeyHashAddress pkh) val Nothing) walletAllocs
+            fmap ((\(pkh, val) -> Ledger.TxOut (Ledger.pubKeyHashAddress pkh Nothing) val Nothing) . (\(pkh, val) -> (Ledger.PaymentPubKeyHash pkh, val))) walletAllocs
               <> fmap (\(vh, val, d) -> Ledger.TxOut (Ledger.scriptHashAddress vh) val $ Just $ Scripts.datumHash d) validatorAllocs
         , Ledger.txData =
             Map.fromList $
