@@ -108,10 +108,10 @@
             ];
           };
           sha256map = {
-            "https://github.com/input-output-hk/plutus"."cc72a56eafb02333c96f662581b57504f8f8992f" =
-              "sha256-Pl3M9rMEoiEKRsTdDr4JwNnRo5Xs4uN66uVpOfaMCfE=";
+            "https://github.com/input-output-hk/plutus"."1a3c3a761cf048371c52a34b004f8b3fcf0dab43" =
+              "sha256-F3qhDJYisd3IapOskQMMccqK+iyKS3rB6vlzW8cEdA0=";
             "https://github.com/mlabs-haskell/plutus-apps.git"."82c0725c4d05398ae76d71927cc60aa23db1a11d" =
-              "sha256-OX4+S7fFUqXRz935wQqdcEm1I6aqg0udSdP19XJtSAk=";
+              "sha256-quJeOzNGT1Ath7zjc1VHdEiJwZaSSXyn0sdVZwVofwI=";
             "https://github.com/Quid2/flat"."ee59880f47ab835dbd73bea0847dab7869fc20d8" =
               "lRFND+ZnZvAph6ZYkr9wl9VAx41pb3uSFP8Wc7idP9M=";
             "https://github.com/input-output-hk/purescript-bridge"."47a1f11825a0f9445e0f98792f79172efef66c00" =
