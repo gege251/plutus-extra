@@ -30,7 +30,8 @@
             chmod u+w $out/cabal.project
             cat $out/cabal-haskell.nix.project >> $out/cabal.project
           '';
-        in (nixpkgsFor system).haskell-nix.cabalProject' {
+        in
+        (nixpkgsFor system).haskell-nix.cabalProject' {
           src = fakeSrc.outPath;
           compiler-nix-name = "ghc8107";
           cabalProjectFileName = "cabal.project";
@@ -42,10 +43,10 @@
               plutus-contract.flags.defer-plugin-errors = deferPluginErrors;
               cardano-crypto-praos.components.library.pkgconfig =
                 nixpkgs.lib.mkForce
-                [ [ (import plutus { inherit system; }).pkgs.libsodium-vrf ] ];
+                  [ [ (import plutus { inherit system; }).pkgs.libsodium-vrf ] ];
               cardano-crypto-class.components.library.pkgconfig =
                 nixpkgs.lib.mkForce
-                [ [ (import plutus { inherit system; }).pkgs.libsodium-vrf ] ];
+                  [ [ (import plutus { inherit system; }).pkgs.libsodium-vrf ] ];
             };
           }];
           shell = {
@@ -63,7 +64,7 @@
               pkgs.haskellPackages.cabal-fmt
             ];
 
-            tools = { 
+            tools = {
               hlint = "3.3.6";
             };
 
@@ -109,7 +110,7 @@
           sha256map = {
             "https://github.com/input-output-hk/plutus"."cc72a56eafb02333c96f662581b57504f8f8992f" =
               "sha256-Pl3M9rMEoiEKRsTdDr4JwNnRo5Xs4uN66uVpOfaMCfE=";
-            "https://github.com/input-output-hk/plutus-apps.git"."7f543e21d4945a2024e46c572303b9c1684a5832" =
+            "https://github.com/mlabs-haskell/plutus-apps.git"."82c0725c4d05398ae76d71927cc60aa23db1a11d" =
               "sha256-OX4+S7fFUqXRz935wQqdcEm1I6aqg0udSdP19XJtSAk=";
             "https://github.com/Quid2/flat"."ee59880f47ab835dbd73bea0847dab7869fc20d8" =
               "lRFND+ZnZvAph6ZYkr9wl9VAx41pb3uSFP8Wc7idP9M=";
@@ -145,7 +146,8 @@
               "C/IWktTILklfPEAht/RE4IC8to6MrvrLmmbqgWsJlIM=";
           };
         };
-    in {
+    in
+    {
       project = perSystem projectFor;
       flake = perSystem (system: (projectFor system).flake { });
 
@@ -153,9 +155,10 @@
       packages = perSystem (system: self.flake.${system}.packages);
       checks = perSystem (system: self.flake.${system}.checks);
       check = perSystem (system:
-        (nixpkgsFor system).runCommand "combined-test" {
-          nativeBuildInputs = builtins.attrValues self.checks.${system};
-        } "touch $out");
+        (nixpkgsFor system).runCommand "combined-test"
+          {
+            nativeBuildInputs = builtins.attrValues self.checks.${system};
+          } "touch $out");
       apps = perSystem (system: self.flake.${system}.apps);
       devShell = perSystem (system: self.flake.${system}.devShell);
     };
